@@ -1,0 +1,30 @@
+{
+  "name": "g2b-bid-scout",
+  "version": "1.0.0",
+  "description": "나라장터 입찰공고를 자동 수집·큐레이션해 강사에게 주 1회 메일로 보내는 봇",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test:fetch": "node src/fetcher.js",
+    "test:filter": "node src/filter.js",
+    "test:mail": "node src/mailer.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TeddyChoi-wow/RFPMonitor.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/TeddyChoi-wow/RFPMonitor/issues"
+  },
+  "homepage": "https://github.com/TeddyChoi-wow/RFPMonitor#readme",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.96.0",
+    "axios": "^1.16.1",
+    "dotenv": "^17.4.2",
+    "nodemailer": "^8.0.7"
+  }
+}

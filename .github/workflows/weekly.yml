@@ -1,0 +1,40 @@
+name: G2B Bid Scout - Weekly Run
+
+on:
+  schedule:
+    # 매주 월요일 KST 17:00 = UTC 08:00
+    - cron: '0 8 * * 1'
+  workflow_dispatch: # 수동 실행 허용
+
+jobs:
+  scout:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run G2B Bid Scout
+        env:
+          G2B_API_KEY: ${{ secrets.G2B_API_KEY }}
+          G2B_BASE_URL: ${{ secrets.G2B_BASE_URL }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          CLAUDE_MODEL: ${{ secrets.CLAUDE_MODEL }}
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          MAIL_TO: ${{ secrets.MAIL_TO }}
+          KEYWORDS: ${{ secrets.KEYWORDS }}
+          TARGET_SCOPE: ${{ secrets.TARGET_SCOPE }}
+          MIN_BUDGET: ${{ secrets.MIN_BUDGET }}
+          DEADLINE_WINDOW_DAYS: ${{ secrets.DEADLINE_WINDOW_DAYS }}
+          INSTRUCTOR_PROFILE: ${{ secrets.INSTRUCTOR_PROFILE }}
+        run: npm start
